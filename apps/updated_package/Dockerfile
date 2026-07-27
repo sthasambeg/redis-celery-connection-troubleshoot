@@ -29,4 +29,7 @@ ENV CELERY_CONCURRENCY=1
 ENV CELERY_QUEUES=connection_test__default
 ENV CELERY_HOSTNAME=updated-package-worker@%h
 
-CMD ["sh", "-c", "exec" ,"celery -A ${CELERY_APP} worker --loglevel=${CELERY_LOGLEVEL} --concurrency=${CELERY_CONCURRENCY} -Q ${CELERY_QUEUES} -E -n ${CELERY_HOSTNAME}"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
