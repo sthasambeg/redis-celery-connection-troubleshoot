@@ -1,0 +1,12 @@
+services:
+  redis:
+    image: redis:8.4.0-alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+    environment:
+      REDIS_USERNAME: default
+      REDIS_PASSWORD: mysecurepassword
+    command: ["redis-server", "--requirepass", "mysecurepassword"]

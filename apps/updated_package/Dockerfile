@@ -3,6 +3,7 @@
 ############################
 FROM python:3.12-alpine AS base
 COPY --from=ghcr.io/astral-sh/uv:0.11.7 /uv /uvx /bin/
+RUN apk add --no-cache iproute2 bash
 
 ############################
 # Stage 2: Builder Stage

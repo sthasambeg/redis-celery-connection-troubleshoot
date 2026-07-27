@@ -1,8 +1,11 @@
 services:
   default-worker:
+    container_name: rct-default
     build:
       context: ./apps/default
       dockerfile: Dockerfile
+    cap_add:
+      - NET_ADMIN
     environment:
       - CELERY_APP=main:app
       - CELERY_LOGLEVEL=info
@@ -19,9 +22,12 @@ services:
           memory: 128M
 
   updated-settings-worker:
+    container_name: rct-settings
     build:
       context: ./apps/updated_settings
       dockerfile: Dockerfile
+    cap_add:
+      - NET_ADMIN
     environment:
       - CELERY_APP=main:app
       - CELERY_LOGLEVEL=info
@@ -38,9 +44,12 @@ services:
           memory: 128M
 
   updated-package-worker:
+    container_name: rct-package
     build:
       context: ./apps/updated_package
       dockerfile: Dockerfile
+    cap_add:
+      - NET_ADMIN
     environment:
       - CELERY_APP=main:app
       - CELERY_LOGLEVEL=info
