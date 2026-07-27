@@ -1,5 +1,6 @@
 import logging
 import os
+import socket
 from dataclasses import dataclass
 
 import celery
@@ -55,6 +56,7 @@ app.conf.update(
         "socket_timeout": 30,  # Read/write socket timeout (seconds)
         "socket_connect_timeout": 30,  # Initial connection timeout (seconds)
         "retry_on_timeout": True,  # Automatically retry on socket timeout
+        "client_name": "settings-worker",
     },
     broker_connection_retry_on_startup=True,  # Prevent worker crash if Redis is starting up
 )

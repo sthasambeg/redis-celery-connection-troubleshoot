@@ -20,6 +20,8 @@ services:
           memory: 256M
         reservations:
           memory: 128M
+    networks:
+      - default
 
   updated-settings-worker:
     container_name: rct-settings
@@ -42,6 +44,8 @@ services:
           memory: 256M
         reservations:
           memory: 128M
+    networks:
+      - default
 
   updated-package-worker:
     container_name: rct-package
@@ -64,6 +68,8 @@ services:
           memory: 256M
         reservations:
           memory: 128M
+    networks:
+      - default
 
 networks:
   default:

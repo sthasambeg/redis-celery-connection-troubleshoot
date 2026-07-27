@@ -1,5 +1,6 @@
 import logging
 import os
+import socket
 from dataclasses import dataclass
 
 import celery
@@ -49,6 +50,9 @@ app.conf.update(
     task_queues=CELERY_QUEUES,
     task_default_queue=Queues.DEFAULT,
     timezone=TIME_ZONE,
+    broker_transport_options={
+        "client_name": "default-worker",
+    },
 )
 
 
