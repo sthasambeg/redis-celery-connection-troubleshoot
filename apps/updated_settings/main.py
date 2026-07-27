@@ -51,7 +51,6 @@ app.conf.update(
     timezone=TIME_ZONE,
     # Fix Redis idle drop issue
     broker_transport_options={
-        "health_check_interval": 10,  # Run healthcheck PING every 10 seconds on idle sockets
         "socket_keepalive": True,  # Enable OS TCP keepalives
         "socket_timeout": 30,  # Read/write socket timeout (seconds)
         "socket_connect_timeout": 30,  # Initial connection timeout (seconds)

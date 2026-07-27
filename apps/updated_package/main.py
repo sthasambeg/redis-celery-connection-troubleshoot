@@ -49,15 +49,6 @@ app.conf.update(
     task_queues=CELERY_QUEUES,
     task_default_queue=Queues.DEFAULT,
     timezone=TIME_ZONE,
-    # Fix Redis idle drop issue
-    broker_transport_options={
-        "health_check_interval": 10,  # Run healthcheck PING every 10 seconds on idle sockets
-        "socket_keepalive": True,  # Enable OS TCP keepalives
-        "socket_timeout": 30,  # Read/write socket timeout (seconds)
-        "socket_connect_timeout": 30,  # Initial connection timeout (seconds)
-        "retry_on_timeout": True,  # Automatically retry on socket timeout
-    },
-    broker_connection_retry_on_startup=True,  # Prevent worker crash if Redis is starting up
 )
 
 
