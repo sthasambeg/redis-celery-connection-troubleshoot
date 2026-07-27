@@ -1,0 +1,123 @@
+exclude = [
+  "gen*",
+  "alembic",
+  "migrations",
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".ipynb_checkpoints",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pyenv",
+  ".pytest_cache",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  ".vscode",
+  ".pgdata",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "site-packages",
+  "venv",
+  "keys",
+  "scripts/check_configs.py",
+]
+line-length = 120
+indent-width = 4
+target-version = "py312"
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[lint]
+select = [
+  "ANN", # Pytype annotations
+  "B",   # Bugbear
+  "C4",  # Comprehensions
+  "C90", # McCabe complexity
+  "COM", # Commas
+  "D",   # Pydocstyle
+  "E",   # Error
+  "ERA", # Checks for commented out code
+  "F",   # Pyflakes
+  "I",   # Isort
+  "N",   # pep8-naming
+  "PIE", # Unnecessary code
+  "PL",  # PyLint checks
+  "PTH", # Pathlib checks
+  "PYI", # validate pyi files
+  "Q",   # Checks for quotes
+  "RET", # Checks return statements
+  "RSE", # Checks raise statements
+  "RUF", # Specific to Ruff checks"E",   # Error
+  "S",   # Bandit
+  "SIM", # Simplificator
+  "SLF", # Self checks
+  "T20", # Catch prints
+  "W",   # Pycodestyle
+]
+ignore = [
+  "ANN201",  #  Missing return type annotation for public function
+  "ANN401",  # typing.Any are disallowed in `**kwargs
+  "B008",    # Do not perform function calls in argument defaults
+  "COM812",  # Missing trailing comma
+  "D100",    # Missing docstring in public module
+  "D101",    # Missing docstring in public class
+  "D102",    # Missing docstring in public method
+  "D103",    # Missing docstring in public function
+  "D104",    # Missing docstring in public package
+  "D105",    # Missing docstring in magic method
+  "D106",    # Missing docstring in public nested class
+  "D107",    # Missing docstring in __init__
+  "D202",    # No blank lines allowed after function docstring
+  "D211",    # No blank lines allowed before class docstring
+  "D212",    # Multi-line docstring summary should start at the first line
+  "D401",    # First line should be in imperative mood
+  "PLR0913", # Too many arguments for function call
+  "PLC0415", # `import` should be at the top-level of a file
+]
+fixable = ["ALL"] # Allow fix for all enabled rules (when `--fix`) is provided.
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$" # Allow unused variables when underscore-prefixed.
+
+[lint.mccabe]
+max-complexity = 10
+
+
+[lint.isort]
+case-sensitive = true
+combine-as-imports = true
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
+
+[lint.per-file-ignores]
+"*factories*.py" = [ "S311"]
+"tests/*" = [ "S101", "S104", "ANN001", "N806"]
+"tests/**/*.py" = ["S101", "S104", "ANN001", "N806"]  # Allow assert in test files
+"test_*.py" = ["S101", "S104", "ANN001", "N806"]       # Allow assert in test files starting with test_
+"*_test.py" = ["S101", "S104", "ANN001", "N806"]       # Allow assert in test files ending with _test
+
+[lint.pydocstyle]
+convention = "pep257"
+ignore-decorators = ["typing.overload"]
+
+[lint.pylint]
+allow-magic-value-types = ["int", "str", "float", "bytes"]

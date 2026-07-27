@@ -1,0 +1,61 @@
+services:
+  default-worker:
+    build:
+      context: ./apps/default
+      dockerfile: Dockerfile
+    environment:
+      - CELERY_APP=main:app
+      - CELERY_LOGLEVEL=info
+      - CELERY_CONCURRENCY=1
+      - CELERY_QUEUES=connection_test__default
+      - CELERY_HOSTNAME=default-worker@%h
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+  updated-settings-worker:
+    build:
+      context: ./apps/updated_settings
+      dockerfile: Dockerfile
+    environment:
+      - CELERY_APP=main:app
+      - CELERY_LOGLEVEL=info
+      - CELERY_CONCURRENCY=1
+      - CELERY_QUEUES=connection_test__default
+      - CELERY_HOSTNAME=updated-settings-worker@%h
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+  updated-package-worker:
+    build:
+      context: ./apps/updated_package
+      dockerfile: Dockerfile
+    environment:
+      - CELERY_APP=main:app
+      - CELERY_LOGLEVEL=info
+      - CELERY_CONCURRENCY=1
+      - CELERY_QUEUES=connection_test__default
+      - CELERY_HOSTNAME=updated-package-worker@%h
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+networks:
+  default:
+    name: redis-celery-network
